@@ -1,0 +1,37 @@
+{% extends 'user_index.html' %}
+{% load static %}
+{% block body %}
+
+<div class="card">
+            <div class="card-body">
+              <!-- Dark Table -->
+              <table class="table table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Company</th>
+                    <th>Medicine Name</th>
+                    <th>Batch Number</th>
+                    <th>QTY</th>
+                    <th>Remaining QTY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.companyname}}</td>
+                    <td>{{i.medicinename}}</td>
+                    <td>{{i.batchnumber}}</td>
+                    <td>{{i.qty}}</td>
+                    <td>{{i.quantity}}</td>
+                  </tr>
+
+                    {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Dark Table -->
+
+            </div>
+          </div>
+{% endblock %}

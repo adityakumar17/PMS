@@ -1,0 +1,59 @@
+{% extends 'user_index.html' %}
+{% load static custom_tags %}
+{% block body %}
+
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body"><br>
+                  <h5 style="color:purple">Cart</h5>
+                  <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                    <div class="col-md-6">
+                      <label for="exampleInputName1">Customer Name</label><br>
+                      <input type="text" class="form-control" name="custname" id="exampleInputName1" value="{{cart.custname}}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="exampleInputName1">Customer Number</label><br>
+                      <input type="text" class="form-control" name="custmobile" id="exampleInputName1" value="{{cart.custmobile}}" required>
+                    </div>
+                    </div><br>
+                    <div class="row">
+                    <div class="col-md-4">
+                          <label style="color:black">Mode of payment</label>
+                          <input type="radio" name="payment" required value="Cash">Cash
+                          <input type="radio" name="payment" required value="Card">Card
+                    </div>
+                    </div>
+                    <div align="center"><br>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                  </div><hr>
+                <table id="example1" class="table table-bordered table-striped">
+                  <tr>
+                    <th>S.No</th>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Price(per unit)</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in productid %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i|productname}}</td>
+                    <td>{% productqty i request.user %}</td>
+                    <td>{{i|productprice}}</td>
+                    <td>{% producttotalprice i request.user %}</td>
+                    <td><a href="/deletecart/{{i}}/" class="btn btn-warning"><i class="fa fa-trash-o"></i></td>
+                  </tr>
+                {% endfor %}
+                </table>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

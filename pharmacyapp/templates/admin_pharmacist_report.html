@@ -1,0 +1,84 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+{% load static custom_tags %}
+
+
+ <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <h4 class="card-title">Pharmacist Sold Report</h4>
+            </div>
+            <div class="card-block">
+            <div class="cantener">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">From Date:*</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="fromdate" value="{{fromdate}}" required>
+                        </div>
+                    </div><br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">To Date:*</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="todate" value="{{todate}}" required>
+                        </div>
+                    </div><br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Sold by Pharmacist:*</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" name="pharmacist" required>
+                            <option value="">Choose Pharmacist</option>
+                            {% for i in pharmacist %}
+                            <option value="{{i.id}}">{{i.user.username}}</option>
+                            {% endfor %}
+                        </select>
+                    </div><br><br><br>
+                    </div>
+                    <div align="center">
+                       <button class="btn btn-primary py-1 px-3" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if data %}
+
+<div class="container">
+<h4>B/w Dates {% if request.GET.type %}{{request.GET.type}}{% elif request.GET.action %}{{request.GET.action}}{% else %}report{% endif %} from "{{fromdate}}" to "{{todate}}"</h4>
+
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                    <th>S.No</th>
+                    <th>Medicine(Batch No)</th>
+                    <th>Quantity</th>
+                    <th>Price(per unit)</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.medicine__medicinename}}</td>
+                    <td>{{i.num_order}}</td>
+                    <td>{{i.medicine__price}}</td>
+                    <td>{% totalpricehitsory i.num_order i.medicine__price %}</td>
+                  </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+{% elif data2 %}
+
+<h3 align="center">Data not found</h3>
+{% endif %}
+
+        </div>
+<!-- Basic Form Inputs card end -->
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{% if pid %}Update{% else %}Add{% endif %} Company</h4>
+                  <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">CompanyName</label><br><br>
+                      <input type="text" class="form-control" name="companyname" id="exampleInputName1" placeholder="CompanyName" value="{{company.companyname}}" required>
+                    </div>
+                    <hr><div align="center"><br>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

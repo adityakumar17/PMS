@@ -1,0 +1,100 @@
+{% extends 'user_index.html' %}
+{% load static %}
+{% block body %}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -37px;
+  position: relative;
+  background:gray;
+  color:yellow;
+  z-index: 2;
+  padding:10px;
+}
+
+.field-icon:hover {
+  cursor:pointer;
+}
+</style>
+<div class="content-wrapper">
+ <section class="content">
+      <div class="container">
+<div class="card card-default">
+          <div class="card-body"><br>
+           <div class="col-sm-6">
+            <h4 class="m-0">User Profile</h4>
+           </div><br>
+            <div class="row">
+              <div class="col-md-12">
+                  <form action="" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                  <div class="row">
+
+                     <div class="col-12 form-group">
+                         <label>First Name</label>
+                         <input type="text" class="form-control" name="firstname"  placeholder="Firstname" required="required" value="{{data.user.first_name}}">
+                      </div>
+
+                       <div class="col-12 form-group">
+                           <label>Email</label>
+                             <input type="password" class="form-control form-control-a" placeholder="Email" name="username" id="email" value="{{data.user.email}}" readonly>
+                             <span class="fa fa-eye field-icon toggle-password-2"></span>
+                       </div>
+                       <div class="col-12 form-group">
+                           <label>Username</label>
+                         <input type="text" class="form-control" name="username" required="required" value="{{data.user.username}}"readonly>
+                       </div>
+
+                       <div class="col-12 form-group">
+                           <label>Mobile</label>
+                            <input type="password" class="form-control form-control-a" name="mobile" id="mobile" placeholder="Mobile" value="{{data.mobile}}">
+                            <span class="fa fa-eye field-icon toggle-password"></span>
+                       </div>
+                      <div class="col-12 form-group">
+                          <label>Registration Date</label>
+                         <input type="text" class="form-control" name="creationdate" required="required" value="{{data.creationdate}}"readonly>
+                       </div>
+                    <div><br>
+                     <button class="btn btn-primary py-1 px-3" type="submit">Update</button>
+                   </div>
+                  </div>
+                   </form>
+                </div>
+            </div>
+
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+</section>
+</div>
+</form>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<script>
+$(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#mobile").attr("type") == "password") {
+    $("#mobile").attr("type", "text");
+  } else {
+    $("#mobile").attr("type", "password");
+  }
+});
+
+$(".toggle-password-2").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#email").attr("type") == "password") {
+    $("#email").attr("type", "email");
+  }
+  else {
+    $("#email").attr("type", "password");
+  }
+});
+</script>
+
+{% endblock %}

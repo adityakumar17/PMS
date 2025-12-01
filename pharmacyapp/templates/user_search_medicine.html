@@ -1,0 +1,75 @@
+{% extends 'user_index.html' %}
+{% load static %}
+{% block body %}
+<div class="card">
+            <div class="card-body">
+<div class="container">
+
+    <h4 class="my-4">Search Medicine</h4><hr>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="text" style="width:100%;" class="form-control" id="exampleInputText1" placeholder="Search Medicine" value="{{fromdate}}" name="fromdate">
+    </div>
+    </br>
+        <button type="submit" class="btn btn-primary">Search</button>
+</form>
+</div>
+<br>{% if data %}
+<div class="container">
+<h3 align="center"> Medicine related to search for '{{fromdate}}'</h3>
+    <table class="table table-dark" style="width:100%">
+
+                <thead>
+                 <tr>
+                    <th>#</th>
+                    <th>Company</th>
+                    <th>Name</th>
+                    <th>Batch Number</th>
+                    <th>QTY</th>
+                    <th>Remaining QTY</th>
+                    <th>Buying Qty</th>
+                     <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.companyname}}</td>
+                    <td>{{i.medicinename}}</td>
+                    <td>{{i.batchnumber}}</td>
+                    <td>{{i.qty}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>
+                        <input type="number" id="qty-{{forloop.counter}}" name="qty" max="5" min="1" value="1">
+                        <input type="hidden" name="myid" value="{{i.id}}">
+                    </td>
+                    <td>
+                        <a href="#" onclick="findProduct('{{i.id}}', 'qty-{{forloop.counter}}')">
+                            <button type="submit" class="btn btn-info">Add to Cart</button>
+                        </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+
+                </table>
+
+</div>
+
+ {% elif data2 %}
+
+<h4 align="center">Data not found</h4>
+{% endif %}
+
+</div>
+</div>
+
+<script>
+    function findProduct(pid, qtyid){
+        var qty = document.getElementById(qtyid).value;
+        window.location = "/add-cart/"+pid+"/?qty="+qty;
+    }
+</script>
+{% endblock %}

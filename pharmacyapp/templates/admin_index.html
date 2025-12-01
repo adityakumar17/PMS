@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets2/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets2/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets2/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets2/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets2/css/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="javascript:;" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block" style="color:red"><i class="fa fa-plus-square"></i>&nbsp; PMS</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+          <!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="{% static 'assets2/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{request.user.username}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{request.user.username}}</h6>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/admin_change_password/">
+                <i class="fa fa-lock"></i>
+                <span>Change password</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/logout_admin/">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="/dashboard/">
+          <i class="fa fa-desktop"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin_invoice/">
+          <i style="color:purple" class="bi bi-search"></i>
+          <span>Invoice Search</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin_medicine_inventory/">
+          <i style="color:purple" class="bi bi-plus"></i>
+          <span>Medicine Inventory</span>
+        </a>
+      </li><hr>
+      <li class="nav-heading">PHARMACY COMPANY</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/add_company/">
+          <i style="color:purple" class="bi bi-plus"></i>
+          <span>Add Company</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/view_company/">
+          <i style="color:purple" class="bi bi-archive"></i>
+          <span>Manage Company</span>
+        </a>
+      </li><hr>
+      <li class="nav-heading">MEDICINE</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/add_medicine/">
+          <i style="color:purple" class="bi bi-plus"></i>
+          <span>Add Medicine</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/view_medicine/">
+          <i style="color:purple" class="bi bi-archive"></i>
+          <span>Manage Medicine</span>
+        </a>
+      </li><hr>
+      <li class="nav-heading">PHARMACIST</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/add_pharmacist/">
+          <i style="color:purple" class="bi bi-plus"></i>
+          <span>Add Pharmacist</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/view_pharmacist/">
+          <i style="color:purple" class="bi bi-archive"></i>
+          <span>Manage Pharmacist</span>
+        </a>
+      </li><hr>
+      <li class="nav-heading">REPORTS</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin_stock_report/">
+          <i style="color:purple" class="bi bi-paperclip"></i>
+          <span>STOCK Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin_pharmacist_report/">
+          <i style="color:purple" class="bi bi-archive"></i>
+          <span>Pharmacist Wise Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin_sales_report/">
+          <i style="color:purple" class="bi bi-bar-chart"></i>
+          <span>Sales Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/order/">
+          <i style="color:green" class="fa fa-file"></i>
+          <span>Invoice</span>
+        </a>
+      </li>
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+          <li class="breadcrumb-item active">{{request.path|mystrip|title}}</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    {% block body %}
+
+    {% endblock %}
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <script>document.write(new Date().getFullYear())</script> <strong><span>PMS</span></strong>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets2/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets2/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets2/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets2/js/main.js' %}"></script>
+{% for i in messages %}
+<script>
+    alert('{{i}}');
+</script>
+    {% endfor %}
+</body>
+
+</html>

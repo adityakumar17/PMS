@@ -1,0 +1,118 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -37px;
+  position: relative;
+  background:gray;
+  color:yellow;
+  z-index: 2;
+  padding:10px;
+}
+
+.field-icon:hover {
+  cursor:pointer;
+}
+</style>
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{% if pid %}Update{% else %}Add{% endif %} Pharmacist</h4>
+{% if pid %}
+                  <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">Full Name</label><br>
+                      <input type="text" class="form-control" name="firstname" id="exampleInputName1" placeholder="Full Name" value="{{pharmacist.user.first_name}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Mobile Number</label><br>
+                        <input type="password" class="form-control form-control-a" name="mobile" id="mobile" placeholder="Mobile" value="{{pharmacist.mobile}}">
+                        <span class="fa fa-eye field-icon toggle-password"></span>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Username</label><br>
+                      <input type="text" class="form-control" name="username" id="exampleInputName1" placeholder="MGF Date" value="{{pharmacist.user.username}}" required readonly>
+                    </div><br>
+                    <div class="form-group">
+                          <label>Gender</label><br>
+                          <input type="radio" name="gender" {% if pharmacist.gender == 'Male' %}checked{% endif %} value="Male">Male
+                          <input type="radio" name="gender" {% if pharmacist.gender == 'Female' %}checked{% endif %} value="Female">Female
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Email</label><br>
+                        <input type="password" class="form-control form-control-a" placeholder="Email" name="email" id="email" value="{{pharmacist.user.email}}" readonly>
+                        <span class="fa fa-eye field-icon toggle-password-2"></span>
+                     </div><br>
+                    <hr><div align="center"><br>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                  </form>
+{% else %}
+                  <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">Full Name</label><br>
+                      <input type="text" class="form-control" name="firstname" id="exampleInputName1" placeholder="Full Name" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Mobile Number</label><br>
+                      <input type="number" class="form-control" name="mobile" id="exampleInputName1" placeholder="Mobile Number" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Username</label><br>
+                      <input type="text" class="form-control" name="username" id="exampleInputName1" placeholder="Username" required>
+                    </div><br>
+                    <div class="form-group">
+                          <label>Gender</label><br>
+                          <input type="radio" name="gender" {% if pharmacist.gender == 'Male' %}checked{% endif %} value="Male">Male
+                          <input type="radio" name="gender" {% if pharmacist.gender == 'Female' %}checked{% endif %} value="Female">Female
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Password</label><br>
+                      <input type="password" class="form-control" name="password" id="exampleInputName1" placeholder="Password" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Email</label><br>
+                      <input type="email" class="form-control" name="email" id="exampleInputName1" placeholder="Email" required>
+                    </div><br>
+                    <hr><div align="center"><br>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                  </form>
+{% endif %}
+                </div>
+              </div>
+            </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<script>
+$(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#mobile").attr("type") == "password") {
+    $("#mobile").attr("type", "text");
+  } else {
+    $("#mobile").attr("type", "password");
+  }
+});
+
+$(".toggle-password-2").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#email").attr("type") == "password") {
+    $("#email").attr("type", "email");
+  }
+  else {
+    $("#email").attr("type", "password");
+  }
+});
+</script>
+
+
+{% endblock %}

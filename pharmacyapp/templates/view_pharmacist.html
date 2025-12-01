@@ -1,0 +1,47 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Manage Pharmacist</h5>
+
+              <!-- Dark Table -->
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Employee Name</th>
+                    <th>User Name</th>
+                    <th>Creation Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.user.first_name}}</td>
+                    <td>{{i.user.username}}</td>
+                    <td>{{i.creationdate}}</td>
+                      <td>
+                        <a href="{% url 'edit_pharmacist' i.user.id %}">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                        </a>
+                        <a href="{% url 'delete_pharmacist' i.id %}" onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button>
+                        </a>
+
+<br>
+
+                    </td>
+                  </tr>
+
+                    {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Dark Table -->
+
+            </div>
+          </div>
+{% endblock %}

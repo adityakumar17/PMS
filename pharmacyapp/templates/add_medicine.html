@@ -1,0 +1,53 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{% if pid %}Update{% else %}Add{% endif %} Medicine</h4>
+                  <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label>Medicine Company</label>
+                      <select class="form-control select2bs4" name="companyname" style="width: 100%;" value="{{company.companyname}}" required>
+                          <option value="">Select Company</option>
+                          {% for i in mycompany %}
+                          <option value="{{i.id}}" {% if i.id == medicine.companyname.id %}selected{% endif %}>{{i.companyname}}</option>
+                          {% endfor %}
+                      </select>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Medicine Name</label><br>
+                      <input type="text" class="form-control" name="medicinename" placeholder="Medicine Name" value="{{medicine.medicinename}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Medicine Batch Number</label><br>
+                      <input type="text" class="form-control" name="batchnumber" placeholder="Batch Number" value="{{medicine.batchnumber}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">MGF Date</label><br>
+                      <input type="date" class="form-control" name="mgfdate" placeholder="MGF Date" value="{{medicine.mgfdate}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Expiry Date</label><br>
+                      <input type="date" class="form-control" name="expirydate" placeholder="Expiry Date" value="{{medicine.expirydate}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Quantity(Total Units)</label><br>
+                      <input type="text" class="form-control" name="quantity" id="exampleInputName1" placeholder="Quantity" value="{{medicine.quantity}}" required>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Price Per Units</label><br>
+                      <input type="text" class="form-control" name="price" placeholder="price" value="{{medicine.price}}" required>
+                    </div><br>
+                    <hr><div align="center"><br>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

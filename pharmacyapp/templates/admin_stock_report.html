@@ -1,0 +1,90 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+{% load static custom_tags %}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-12" style="color:purple">
+           <center> <h2 class="m-0">Between Dates Reports</h2></center>
+                  <form action="" method="post">
+                      {% csrf_token %}
+                <div class="form-group">
+                  <label>From Date</label>
+                    <input type="date" class="form-control select2bs4" name="fromdate" value="{{fromdate}}" style="width: 100%;" required>
+                  </div>
+                <div class="form-group">
+                  <label>To Date</label>
+                  <input type="date" class="form-control select2bs4" name="todate" value="{{todate}}" style="width: 100%;" required>
+                  </div>
+                   <div align="center"><br>
+                     <button class="btn btn-primary py-1 px-3" type="submit">Submit</button>
+                   </div>
+                    </form>
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+{% if data %}
+      <section class="content">
+      <div class="container">
+          <h3 align="center"> Medicine search for '{{fromdate}}' To '{{todate}}'</h3>
+        <div class="row">
+          <div class="col-12">
+<div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                     <tr>
+                    <th>#</th>
+                    <th>Company</th>
+                    <th>Name</th>
+                    <th>Batch Number</th>
+                    <th>QTY</th>
+                    <th>Sold QTY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.companyname}}</td>
+                    <td>{{i.medicinename}}</td>
+                    <td>{{i.batchnumber}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.soldqty}}</td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+</div>
+{% elif data2 %}
+
+<h3 align="center">Data not found</h3>
+
+{% endif %}
+<script>
+    totalloop = parseInt('{{invoice.count}}');
+    totalamount = parseInt('{{data.quantity}}')
+    totaldue= 0
+    for(var i=1;i<=totalloop;i++){
+        totaldue += parseInt(document.getElementById('productid-'+i).innerHTML);
+    }
+    document.getElementById('totaldue').innerHTML = totalamount - totaldue;
+</script>
+
+{% endblock %}

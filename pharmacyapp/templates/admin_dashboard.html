@@ -1,0 +1,176 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+<section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+              <a href="/view_pharmacist/">
+                <div class="card-body">
+                  <h5 class="card-title">Total | PHARMACIST</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-pie-chart"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{total.count}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <a href="/view_company/">
+                <div class="card-body">
+                  <h5 class="card-title">Total | Medical Company</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-plus-square"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{all.count}}</h6>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+
+              <div class="card info-card customers-card">
+                <a href="/view_medicine/">
+                <div class="card-body">
+                  <h5 class="card-title">Total | Medicine</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-medkit"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{medicine.count}}</h6>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+
+            </div><!-- End Customers Card -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+      </div>
+  <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+                <a class="nav-link" href="/order/?action=Today">
+                <div class="card-body">
+                  <h5 class="card-title">Todays | Sales</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-inr"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{todaydata_amount}}</h6>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <a class="nav-link" href="/order/?action=Yesterday">
+                <div class="card-body">
+                  <h5 class="card-title">Yesterday | Sales</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-inr"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{yesterdaydata_amount}}</h6>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+              <div class="card info-card customers-card">
+                <a class="nav-link" href="/order/?action=Last 7 days">
+                <div class="card-body">
+                  <h5 class="card-title">Last Sevendays | Sales</span></h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-inr"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{last7data_amount}}</h6>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div><!-- End Customers Card -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+      </div>
+  <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+
+              <div class="col-xxl-12 col-xl-12">
+              <div class="card info-card customers-card">
+              <a class="nav-link" href="/order/">
+                <div class="card-body">
+                  <h5 class="card-title">Total | Sales</span></h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-inr"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{total_amount}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+    </section>
+
+{% endblock %}

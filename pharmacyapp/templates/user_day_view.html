@@ -1,0 +1,68 @@
+{% extends 'user_index.html' %}
+{% load static custom_tags %}
+{% block body %}
+
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{request.GET.action}}</h5>
+
+              <!-- Dark Table -->
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Pharmacist</th>
+                    <th>Order Number</th>
+                    <th>Total Price</th>
+                    <th>BookingDate</th>
+                    <th>Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.user}}</td>
+                    <td>{{i.orderid}}</td>
+                    <td class="price">{{i.totalprice}}</td>
+                    <td>{{i.updated}}</td>
+                    <td><a href="{% url 'user_delete_order' i.id %}" onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button>
+                    </a></td>
+                  </tr>
+                {% endfor %}
+                <td></td>
+                <td></td>
+                <td>Grand</td>
+                <td id="totalprice"></td>
+                <td></td>
+                <td></td>
+                </tbody>
+              </table>
+              <h1 style="color:green">
+                 <h4 align="center"><button onclick="window.print()"><i class="fa fa-file"></i></button></h4>
+              </h1>
+              <!-- End Dark Table -->
+            </div>
+          </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        function calculateTotalprice() {
+            let totalprice = 0;
+            const priceElements = document.querySelectorAll('.price');
+
+            priceElements.forEach(function (priceElement) {
+                totalprice += parseFloat(priceElement.textContent);
+            });
+
+            document.getElementById('totalprice').textContent = totalprice.toFixed(2);
+        }
+
+        calculateTotalprice();
+
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+{% load custom_tags %}
+
+<div class="card">
+<div class="card-body"><br>
+	<h5>Sales Report:</h5><hr>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label class="form-label">From Date:</label>
+			<input type="date" class="form-control" name="fromdate" value="{{fromdate}}" required>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">To Date:</label>
+			<input type="date" class="form-control" name="todate" value="{{todate}}" required>
+		</div>
+		<div>
+			 <label class="form-label">Request Type:</label>
+			<br>
+			<input type="radio" name="reqtype" value="Month" {% if req == "Month" %}checked{% endif %}> Month wise
+			<input type="radio" name="reqtype" value="Year" {% if req == "Year" %}checked{% endif %}> Year wise
+		</div>
+		<br>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+{% if req == "Month" %}
+<div class="container">
+<h4>Month wise {% if request.GET.type %}{{request.GET.type}}{% elif request.GET.action %}{{request.GET.action}}{% else %}report{% endif %} from "{{fromdate}}" to "{{todate}}"</h4>
+		<hr/>
+		<div class="table-responsive">
+			<table id="example" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Month/Year</th>
+					<th>Sales</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for i in monthli %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{i|findmonth}}</td>
+						<td>{{i|findreportmonth}} Rs.</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% else %}
+<div class="container">
+<h4>Year wise {% if request.GET.type %}{{request.GET.type}}{% elif request.GET.action %}{{request.GET.action}}{% else %}report{% endif %} from "{{fromdate}}" to "{{todate}}"</h4>
+		<hr/>
+		<div class="table-responsive">
+			<table id="example2" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Year</th>
+					<th>Sales</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for i in yearli %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{i}}</td>
+					<td>{{i|findreportyear}} Rs.</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endif %}
+    </div>
+{% endblock %}
